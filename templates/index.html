@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPv4 Subnet Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <img src="{{ url_for('static', filename='img/network.png') }}" alt="Logo" class="logo-icon">
+                <h1>Subnet Calculator</h1>
+            </div>
+            <p class="subtitle">Advanced IPv4 network analysis and planning tool.</p>
+        </header>
+
+        <!-- Input Section -->
+        <div class="card input-card">
+            <form id="calcForm" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="ip">IPv4 Address</label>
+                    <input type="text" id="ip" name="ip" placeholder="e.g. 192.168.1.10" autocomplete="off">
+                </div>
+                
+                <div class="form-group">
+                    <label for="cidr">Prefix (CIDR)</label>
+                    <div class="input-wrapper">
+                        <span class="prefix">/</span>
+                        <input type="number" id="cidr" name="cidr" placeholder="24" min="0" max="32">
+                    </div>
+                </div>
+            </form>
+            <div id="error-msg" class="error-message hidden"></div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="results-wrapper hidden">
+            
+            <!-- Primary Info -->
+            <div class="card results-card">
+                <h2 class="section-title">Network Details</h2>
+                <div class="grid-layout">
+                    <div class="result-item">
+                        <span class="label">Network Address</span>
+                        <span class="value code" id="res-network"></span>
+                        <div class="binary-sub" id="bin-net"></div>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Broadcast Address</span>
+                        <span class="value code" id="res-broadcast"></span>
+                        <div class="binary-sub" id="bin-bc"></div>
+                    </div>
+                    <div class="result-item">
+                        <span class="label">Subnet Mask</span>
+                        <span class="value code" id="res-mask"></span>
+                        <div class="binary-sub" id="bin-mask"></div>
+                    </div>
+                    <div class="result-item highlight">
+                        <span class="label">Usable Hosts</span>
+                        <span class="value" id="res-usable"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary Info -->
+            <div class="grid-split">
+                <div class="card">
+                    <h2 class="section-title">Range</h2>
+                    <div class="list-layout">
+                        <div class="list-item">
+                            <span class="label">First IP</span>
+                            <span class="value code" id="res-first"></span>
+                        </div>
+                        <div class="list-item">
+                            <span class="label">Last IP</span>
+                            <span class="value code" id="res-last"></span>
+                        </div>
+                        <div class="list-item">
+                            <span class="label">Total IPs</span>
+                            <span class="value" id="res-total"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2 class="section-title">Properties</h2>
+                    <div class="list-layout">
+                        <div class="list-item">
+                            <span class="label">Type</span>
+                            <span class="value badge" id="res-type"></span>
+                        </div>
+                        <div class="list-item">
+                            <span class="label">Class</span>
+                            <span class="value badge" id="res-class"></span>
+                        </div>
+                        <div class="list-item">
+                            <span class="label">CIDR</span>
+                            <span class="value code" id="res-cidr"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMPORTANT: Define the URL dynamically from Flask -->
+    <script>
+        const CALCULATE_URL = "{{ url_for('calculate') }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
