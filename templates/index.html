@@ -26,7 +26,8 @@
             <form id="calcForm" onsubmit="return false;">
                 <div class="form-group">
                     <label for="ip">IPv4 Address</label>
-                    <input type="text" id="ip" name="ip" placeholder="e.g. 192.168.1.10" autocomplete="off">
+                    <!-- Added inputmode="decimal" here. This triggers the number pad with a dot on mobile -->
+                    <input type="text" inputmode="decimal" id="ip" name="ip" placeholder="e.g. 192.168.1.10" autocomplete="off">
                 </div>
                 
                 <div class="form-group">
@@ -110,7 +111,7 @@
         </div>
     </div>
 
-    <!-- IMPORTANT: Define the URL dynamically from Flask -->
+    <!-- Dynamic URL Script -->
     <script>
         const CALCULATE_URL = "{{ url_for('calculate') }}";
     </script>
