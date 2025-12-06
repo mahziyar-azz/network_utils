@@ -28,7 +28,7 @@ A modern, dark-themed, responsive web application built with **Python (Flask)** 
 Clone the repository:
 
 ```bash
-git clone https://github.com/mahziyar-azz/subnet-calculator.git
+git clone https://github.com/mahziyar-azz/network_utils.git
 ```
 
 Install dependencies:
